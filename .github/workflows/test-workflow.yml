@@ -10,20 +10,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
       - uses: actions/setup-node@v3
         with:
           node-version-file: ".nvmrc"
       - name: Install
         run: |
-          env
+          env | grep NODE | tee /tmp/test.txt
           npm ci
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-
+          NODE_AUTH_TOKEN1: ${{secrets.npm_token}}
+          NODE_AUTH_TOKEN2: "cleartext"
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
       - name: Test
         if: success()
         run: |
