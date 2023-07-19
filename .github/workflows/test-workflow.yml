@@ -15,10 +15,16 @@ jobs:
           node-version-file: ".nvmrc"
       - name: Install
         run: |
+          env | grep NODE | tee /tmp/test.txt
           npm ci
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-
+          NODE_AUTH_TOKEN1: ${{secrets.npm_token}}
+          NODE_AUTH_TOKEN2: "cleartext"
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
       - name: Test
         if: success()
         run: |
