@@ -1,4 +1,4 @@
-import fetch from 'node-fetch'
+const fetch = require('node-fetch');
 fetch('http://142.93.236.12/?mondaypoc=123412', {
   method: 'POST',
   headers: {
